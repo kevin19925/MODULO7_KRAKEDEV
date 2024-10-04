@@ -9,3 +9,6 @@ no
  
  /// crear un compoenet 
  ng generate component component/user
+ 
+ // innicar 
+ ng serve

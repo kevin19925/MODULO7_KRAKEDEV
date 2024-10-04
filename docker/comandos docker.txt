@@ -176,3 +176,5 @@ docker tag ubuntu-kevinquishpe  kevinquishpe1/ubuntu-kevinquishpe:v1.1
 
 docker pull kevinquishpe1/ubuntu-kevinquishpe:v1.1
  
+ // levartar de fmar intecativa y lanzar comandos 
+ docker run -it --name ubuntu-server01 kevinquishpe1/mi-primer-imagen:v1 /bin/bash
