@@ -1,0 +1,178 @@
+docker --version
+Muestra la versión instalada de Docker.
+
+docker pull <imagen>
+Descarga una imagen de Docker del repositorio (Docker Hub).
+
+Ejemplo: docker pull ubuntu
+docker images
+Lista todas las imágenes descargadas en tu sistema.
+
+docker rmi <imagen>
+Elimina una imagen.
+
+Ejemplo: docker rmi ubuntu
+docker run <imagen>
+Crea y ejecuta un contenedor basado en una imagen.
+
+Ejemplo: docker run ubuntu
+docker run -it <imagen> /bin/bash
+Crea un contenedor y te permite acceder de forma interactiva.
+
+Ejemplo: docker run -it ubuntu /bin/bash
+docker ps
+Lista los contenedores en ejecución.
+
+docker ps -a
+Lista todos los contenedores, incluidos los que no están en ejecución.
+
+docker stop <id_contenedor>
+Detiene un contenedor en ejecución.
+
+Ejemplo: docker stop 123abc
+docker start <id_contenedor>
+Inicia un contenedor detenido.
+
+Ejemplo: docker start 123abc
+docker rm <id_contenedor>
+Elimina un contenedor detenido.
+
+Ejemplo: docker rm 123abc
+docker logs <id_contenedor>
+Muestra los registros de un contenedor.
+
+Ejemplo: docker logs 123abc
+docker exec -it <id_contenedor> /bin/bash
+Ejecuta un comando en un contenedor en ejecución de manera interactiva.
+
+Ejemplo: docker exec -it 123abc /bin/bash
+docker build -t <nombre_imagen> <ruta>
+Crea una nueva imagen a partir de un Dockerfile.
+
+Ejemplo: docker build -t mi_imagen .
+docker network ls
+Lista las redes de Docker.
+
+docker network create <nombre_red>
+Crea una nueva red.
+
+Ejemplo: docker network create mi_red
+docker network connect <nombre_red> <id_contenedor>
+Conecta un contenedor a una red.
+
+Ejemplo: docker network connect mi_red 123abc
+docker volume ls
+Lista los volúmenes de Docker.
+
+docker volume create <nombre_volumen>
+Crea un nuevo volumen.
+
+Ejemplo: docker volume create mi_volumen
+docker-compose up
+Levanta los servicios definidos en un archivo docker-compose.yml.
+
+docker-compose down
+Detiene y elimina los contenedores y redes creados con docker-compose.
+
+
+docker run --name mi_postgres -e POSTGRES_PASSWORD=mi_contraseña -p 5433:5432 -d postgres
+-p 5433:5432: Mapea el puerto 5433 del host al puerto 5432 del contenedor. De este modo, puedes acceder a PostgreSQL en el puerto 5433 del host.
+
+Si quieres acceder a tu PostgreSQL en el contenedor, usarías localhost:5433 desde la máquina host,
+ y Docker se encargaría de redirigir esa conexión al puerto 5432 del contenedor.
+ 
+psql -h localhost -p 5433 -U postgres
+
+
+// buscar 
+docker search hola-mundo
+
+// ver imagenes 
+docker images
+
+// ver contenedor  corriendo 
+
+docker ps
+
+// descrgar contenerdor 
+docker pull hola-mundo
+
+// levantar img a  contenerdor docker 
+docker run -it aa08f42dc496
+
+// contenedores en ejecuin y deteniso 
+docker ps -a
+
+--------------------------- comandos de  correr 
+1. Ejecutar un contenedor básico:
+   docker run <imagen>
+
+2. Ejecutar un contenedor en segundo plano (detached mode):
+   docker run -d <imagen>
+
+3. Ejecutar un contenedor con un nombre específico:
+   docker run --name <nombre_contenedor> <imagen>
+
+4. Ejecutar un contenedor y eliminarlo automáticamente después de detenerlo:
+   docker run --rm <imagen>
+
+5. Ejecutar múltiples réplicas de un contenedor con Docker Compose:
+   Archivo docker-compose.yml:
+   version: '3'
+   services:
+     mi_servicio:
+       image: nginx
+       deploy:
+         replicas: 3
+       ports:
+         - "8080:80"
+   
+   Luego ejecutar:
+   docker-compose up -d
+
+6. Ejecutar múltiples réplicas de un contenedor con Docker Swarm:
+   docker swarm init
+   docker service create --name mi_servicio --replicas 3 -p 8080:80 nginx
+
+7. Escalar réplicas de un servicio con Docker Swarm:
+   docker service scale mi_servicio=5
+
+8. Ejecutar un contenedor con limitaciones de recursos:
+   docker run -d --cpus="1.5" --memory="500m" <imagen>
+
+9. Ejecutar un contenedor en modo interactivo con una terminal:
+   docker run -it <imagen>
+
+10. Ejecutar un contenedor con volumenes persistentes:
+   docker run -d -v /ruta/del/host:/ruta/del/contenedor <imagen>
+//// pg admin 
+ docker pull dpage/pgadmin4
+ docker run -p 8082:80 -e "PGADMIN_DEFAULT_EMAIL=kevinqui199925@gmail.com" -e "PGADMIN_DEFAULT_PASSWORD=admin" --name pgadmin -d dpage/pgadmin4
+ // eliminarlo
+ docker container rm nombre 
+ // saber ip de postgres 
+  docker inspect mi_postgres
+  
+  /--//
+  docker run --name miserverab -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=mibasedatos -p 5432:5432 -d postgres
+/// listar
+dir 
+
+///
+docker tag mi-primer-imagen kevinquishpe1/mi-primer-imagen:v1 se utiliza para asignar una nueva etiqueta (o "tag")
+ a una imagen de Docker existente. En este caso, está renombrando o etiquetando la imagen
+ local mi-primer-imagen para que tenga un formato adecuado para ser subida a un repositorio (como Docker Hub) bajo el nombre de usuario
+ 
+ //// subir la imagen 
+ docker push kevinquishpe1/mi-primer-imagen:v1
+ 
+ 
+ 
+ 
+ /// para images
+ 
+docker build -t ubuntu-kevinquishpe:latest .
+docker tag ubuntu-kevinquishpe  kevinquishpe1/ubuntu-kevinquishpe:v1.1
+
+docker pull kevinquishpe1/ubuntu-kevinquishpe:v1.1
+ 

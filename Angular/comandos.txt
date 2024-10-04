@@ -1,0 +1,11 @@
+//crear proyecto
+ng new ejempl1
+// por defecto css
+no
+// ejecutar ingresar a la carpeta 
+npm start 
+no
+// archivo epect para pruebas unitarias 
+ 
+ /// crear un compoenet 
+ ng generate component component/user
